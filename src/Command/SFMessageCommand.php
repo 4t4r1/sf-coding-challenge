@@ -7,9 +7,15 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class SFMessageCommand extends Command
 {
+    /**
+     * @var MessageBusInterface $bus
+     */
+    private $bus;
+
     /**
      * The name of the command.
      *
@@ -24,6 +30,12 @@ class SFMessageCommand extends Command
      */
     protected static $defaultDescription = 'Outputs a message.';
 
+    public function __construct(string $name = null, MessageBusInterface $bus = null)
+    {
+        parent::__construct($name);
+        $this->bus = $bus;
+    }
+
     protected function configure()
     {
         $this->addArgument('message', InputArgument::REQUIRED, 'The message to display.');
@@ -33,7 +45,7 @@ class SFMessageCommand extends Command
     {
         // send the message via a controller
         $messenger = new SFMessageController();
-        $messenger->sendMessage($input, $output);
+        $messenger->sendMessage($input, $output, $this->bus);
 
         // this method must return an integer number with the "exit status code"
         // of the command. You can also use these constants to make code more readable
