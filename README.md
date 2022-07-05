@@ -9,19 +9,19 @@ See [https://symfony.com/releases/5.4](https://symfony.com/releases/5.4)
 ## Set up
 
 1. Download the repo
-2. Run `composer install` inn the project root
+2. Run `composer install` in the project root
 
 ## To run
 
-```php bin/console app:sfmessage "Hello world"```
+* Run `php bin/console app:sfmessage "Hello world"` in the project root
 
 ## To test
 
-```php bin/phpunit```
+* Run `php bin/phpunit` in the project root
 
 ## Logs
 
-Middleware logs can be found in `./var/dev.log`
+* Middleware logs can be found in `./var/dev.log`
 
 # SF Backend Coding Challenge Brief
 
