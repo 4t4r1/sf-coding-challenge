@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Controller\SFMessageController;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,9 +31,9 @@ class SFMessageCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // retrieve the argument value using getArgument()
-        $output->writeln($input->getArgument('message'));
-        $output->writeln('I printed ' . $input->getArgument('message'));
+        // send the message via a controller
+        $messenger = new SFMessageController();
+        $messenger->sendMessage($input, $output);
 
         // this method must return an integer number with the "exit status code"
         // of the command. You can also use these constants to make code more readable
